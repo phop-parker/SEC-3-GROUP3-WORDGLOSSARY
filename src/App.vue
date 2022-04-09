@@ -1,114 +1,70 @@
-<script setup>
-// import BaseWordListPageBtn from './components/BaseWordListPageBtn.vue'
-// import BaseRandomPageBtn from './components/BaseRandomPageBtn.vue'
-</script>
+<script setup></script>
 
 <template>
 	<div>
-		<div id="menu">
-			<!-- <BaseWordListPageBtn :currentPage="page" />
-			<BaseRandomPageBtn :currentPage="page" /> -->
-			<router-link :to="{ name: 'WordList' }"
-				><div class="menu">Word List Page</div></router-link
-			>
-			<router-link :to="{ name: 'Random' }"
-				><div class="menu">Random Page</div></router-link
-			>
-		</div>
-		<div id="container">
-			<div id="content">
+		<div class="container">
+			<div class="navBar">
+				<img src="./assets/bookShelf.ico" class="logo" />
+				<nav>
+					<ul>
+						<li><router-link :to="{ name: 'Home' }">Home</router-link></li>
+						<li><router-link :to="{ name: 'WordList' }">Word List</router-link></li>
+						<li><router-link :to="{ name: 'Random' }">Random</router-link></li>
+						<li><router-link :to="{ name: 'AboutUs' }">About Us</router-link></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="main">
 				<router-view></router-view>
 			</div>
+			<a href="#" class="top">&#8593;</a>
 		</div>
-		<a href="#" @click="scrollToTop()" class="top">Back to Top &#8593;</a>
 	</div>
 </template>
 
-<style>
+<style scoped>
 body {
-	min-height: 100vh;
-	min-width: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: linear-gradient(
-		0deg,
-		rgba(222, 203, 164, 1) 0%,
-		rgba(62, 81, 81, 1) 100%
-	);
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
 
-	/* background-image: url("../src/assets/bg1.jpg"); */
-	/* background-size: 100%; */
+.main {
+	margin-bottom: 5%;
 }
-#menu {
-	/* background-color: aqua;
-	height: 40px; */
-	margin-top: 50px;
-	display: flex;
-}
-#container {
-	/* position: relative; */
+.container {
 	width: 100%;
-	min-width: 800px;
-	min-height: 480px;
-	height: auto;
-	background: #fff;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
-	/* content: ''; */
+	min-height: 100vh;
+	padding-left: 8%;
+	padding-right: 8%;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.navBar {
+	width: 100%;
 	display: flex;
-	/* clear: both; */
 	align-items: center;
-	justify-content: center;
-	padding-top: 30px;
-	padding-bottom: 30px;
-	/* border: 5px solid #3e5151; */
-	/* border: 5px solid #3e5151; */
-	/* border: 5px solid #decba4; */
-	margin-bottom: 60px;
 }
-
-.menu {
-	/* background-color: #fff0d3; */
-	background-color: #394848;
-	height: 35px;
-	width: 150px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	/* border: 5px solid #decba4; */
-	/* border-bottom: none; */
-	margin-left: 20px;
-	margin-right: -5px;
-	text-align: center;
-	padding-top: 12px;
-	font-size: 16px;
+.logo {
+	width: 40px;
+	margin: 30px 0;
 }
-.menu:hover {
-	cursor: pointer;
-	background-color: #525f5f;
-
-	color: white;
+nav {
+	flex: 1;
+	text-align: right;
 }
-a {
-	/* color: #c2b18f; */
-	color: #ffffff;
-	/* color: #759191; */
+nav ul li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 30px;
+}
+nav ul li a {
 	text-decoration: none;
+	color: #000;
+	font-size: 14px;
 }
-
-a.router-link-active div {
-	/* border: 5px solid #decba4; */
-	border: 5px solid #ffffff;
-	border-bottom: 5px solid #394848;
-	height: 25px;
-	/* border-bottom: 5px solid #fff0d3; */
-	/* padding-top: 10px; */
-	/* color: #3e5151; */
-	/* text-decoration: underline; */
-	color: white;
-}
-a.router-link-active div:hover {
-	background-color: #394848;
+nav ul li a:hover {
+	color: #719999;
 }
 .top {
 	position: fixed;
@@ -120,9 +76,14 @@ a.router-link-active div:hover {
 	border-radius: 20px;
 	margin-left: 800px;
 	opacity: 10px;
+	text-decoration: none;
 }
 .top:hover {
-	background-color: #4f6464;
+	background: linear-gradient(
+		90deg,
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	);
 	cursor: pointer;
 }
 </style>

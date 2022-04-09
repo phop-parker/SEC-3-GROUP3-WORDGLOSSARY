@@ -30,6 +30,7 @@ const newFullWord = computed(() => {
 							required
 							autofocus
 						/>
+
 						<input
 							type="text"
 							id="meaning"
@@ -37,6 +38,7 @@ const newFullWord = computed(() => {
 							v-model="newFullWord.meaning"
 							required
 						/>
+
 						<button
 							v-if="newFullWord.id > 0"
 							type="submit"
@@ -48,7 +50,6 @@ const newFullWord = computed(() => {
 							Add
 						</button>
 					</div>
-					<!-- <div class="input-box"></div> -->
 				</div>
 			</div>
 		</form>
@@ -57,27 +58,27 @@ const newFullWord = computed(() => {
 
 <style scoped>
 form {
-	width: 500px;
+	width: 100%;
 	/* padding-top: px; */
-	display: flex;
-	margin-bottom: 15px;
+	/* display: flex; */
+
+	/* margin-bottom: 15px; */
 }
-/* form .input-boxes {
-	margin-top: 50px;
-} */
+
 form .input-box {
 	height: 40px;
 	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	/* display: flex; */
+	/* align-items: center; */
+	/* justify-content: center; */
+
 	/* align-items: center; */
 
 	/* margin-bottom: 20px; */
 }
 .input-box input {
 	height: 100%;
-	width: 250px;
+	width: 200px;
 	/* font-size: 14px; */
 	outline: none;
 	border-radius: 5px;
@@ -85,6 +86,7 @@ form .input-box {
 	/* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
 	margin-right: 15px;
 	padding-left: 8px;
+	/* margin-top: 10px; */
 }
 .input-box input:focus,
 .input-box input:valid {
@@ -95,14 +97,27 @@ button {
 	border-radius: 5px;
 	/* height: 30px; */
 	/* background-color: #3e5151; */
-	background-color: #9e8e6c;
+	/* background-color: #9e8e6c; */
+	background: linear-gradient(
+		90deg,
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	);
 	/* margin-top: 10px; */
 	height: 40px;
+	border-radius: 6px;
+	outline: none;
+	border: 0;
 }
 button:hover {
 	cursor: pointer;
 	/* background-color: #394848; */
-	background-color: #b3a17b;
+	/* background-color: #b3a17b; */
+	background: linear-gradient(
+		90deg,
+		rgb(102, 137, 137) 0%,
+		rgb(50, 66, 66) 100%
+	);
 }
 /* ::placeholder {
 	color: lightgray;

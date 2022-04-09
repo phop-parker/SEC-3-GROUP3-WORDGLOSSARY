@@ -89,28 +89,52 @@ const updateWord = async (replaceWord) => {
 				v-model="keyWord"
 			/>
 			<i class="fa fa-search"></i>
+			<div class="form">
+				<CreateEditWord
+					@addWord="addFullWord"
+					:currentWord="editingWord"
+					@updateWord="updateWord"
+				/>
+			</div>
 		</div>
-
-		<CreateEditWord
-			@addWord="addFullWord"
-			:currentWord="editingWord"
-			@updateWord="updateWord"
-		/>
-		<ShowWords
-			:fullWords="filterWords"
-			@delete="deletefullWord"
-			@edit="toEditMode"
-		/>
+		<div class="showWord">
+			<ShowWords
+				:fullWords="filterWords"
+				@delete="deletefullWord"
+				@edit="toEditMode"
+			/>
+		</div>
 	</div>
 </template>
 
 <style scoped>
+.showWord {
+	/* margin-top: -5%; */
+	position: relative;
+}
+.form {
+	/* height: 300px; */
+	/* background: linear-gradient(
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	); */
+	/* background-color: red; */
+	/* border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative; */
+	margin-left: 260px;
+}
 #filterInput {
 	/* margin-top: 35px; */
 	outline: none;
 	border: none;
-	padding-bottom: 10px;
+	/* padding-bottom: 10px; */
 	padding-left: 10px;
+	width: 30%;
+	/* background-color: aqua; */
+	border-bottom: 1px solid lightgray;
 }
 ::placeholder {
 	color: lightgray;
@@ -119,10 +143,29 @@ const updateWord = async (replaceWord) => {
 	min-width: 590px;
 	margin-bottom: 15px;
 	/* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
-	border-bottom: 1px solid lightgray;
+	/* background-color: aqua; */
+	display: flex;
 }
 i {
 	color: lightgray;
-	margin-left: 400px;
+	/* margin-left: 200px; */
+	margin-top: 10px;
+}
+.row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 100px 0;
+}
+.col-1 {
+	/* flex-basis: 50%; */
+	position: relative;
+	margin-left: 50px;
+}
+.col-2 {
+	position: relative;
+	flex-basis: 60%;
+	display: flex;
+	align-items: center;
 }
 </style>
