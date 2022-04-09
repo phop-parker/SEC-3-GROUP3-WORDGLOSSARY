@@ -2,6 +2,7 @@
 import { onBeforeMount, ref } from 'vue'
 import ShowWords from '../components/ShowWords.vue'
 import CreateEditWord from '../components/CreateEditWord.vue'
+
 const fullWords = ref([])
 //GET
 const getFullWords = async () => {
@@ -70,15 +71,15 @@ const updateWord = async (replaceWord) => {
 
 <template>
 	<div>
-		<CreateEditWord
-			@addWord="addFullWord"
-			:currentWord="editingWord"
-			@updateWord="updateWord"
-		/>
 		<ShowWords
 			:fullWords="fullWords"
 			@delete="deletefullWord"
 			@edit="toEditMode"
+		/>
+		<CreateEditWord
+			@addWord="addFullWord"
+			:currentWord="editingWord"
+			@updateWord="updateWord"
 		/>
 	</div>
 </template>

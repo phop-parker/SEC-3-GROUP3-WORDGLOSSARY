@@ -10,6 +10,7 @@ defineProps({
 
 <template>
 	<div>
+		<input id="filterWord" placeholder="Filter by Word or Meanning..." />
 		<div class="table">
 			<table class="content-table">
 				<thead>
@@ -38,7 +39,7 @@ defineProps({
 
 <style scoped>
 table {
-	min-width: 500px;
+	min-width: 600px;
 	border: 1px solid black;
 	border-radius: 5px 5px 5px 5px;
 }
@@ -58,5 +59,15 @@ thead tr {
 	background-color: #3e5151;
 	color: white;
 	font-weight: bold;
+}
+#filterWord {
+	min-width: 590px;
+	/* margin-top: 35px; */
+	margin-bottom: 15px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	padding-bottom: 10px;
+	padding-left: 10px;
 }
 </style>

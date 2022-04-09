@@ -30,8 +30,6 @@ const newFullWord = computed(() => {
 							required
 							autofocus
 						/>
-					</div>
-					<div class="input-box">
 						<input
 							type="text"
 							id="meaning"
@@ -39,17 +37,18 @@ const newFullWord = computed(() => {
 							v-model="newFullWord.meaning"
 							required
 						/>
+						<button
+							v-if="newFullWord.id > 0"
+							type="submit"
+							@click="$emit('updateWord', newFullWord)"
+						>
+							Save
+						</button>
+						<button v-else type="submit" @click="$emit('addWord', newFullWord)">
+							Add
+						</button>
 					</div>
-					<button
-						v-if="newFullWord.id > 0"
-						type="submit"
-						@click="$emit('updateWord', newFullWord)"
-					>
-						Save
-					</button>
-					<button v-else type="submit" @click="$emit('addWord', newFullWord)">
-						Add
-					</button>
+					<!-- <div class="input-box"></div> -->
 				</div>
 			</div>
 		</form>
@@ -59,28 +58,46 @@ const newFullWord = computed(() => {
 <style scoped>
 form {
 	width: 500px;
-	padding-bottom: 20px;
+	padding-top: 15px;
+	display: flex;
 }
-form .input-boxes {
-	margin-top: 80px;
-}
+/* form .input-boxes {
+	margin-top: 50px;
+} */
 form .input-box {
-	height: 50px;
+	height: 40px;
 	width: 100%;
 	display: flex;
 	align-items: center;
-	margin-bottom: 20px;
+	justify-content: center;
+	/* align-items: center; */
+
+	/* margin-bottom: 20px; */
 }
 .input-box input {
 	height: 100%;
-	width: 100%;
-	font-size: 16px;
+	width: 250px;
+	font-size: 14px;
 	outline: none;
-	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	/* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+	margin-right: 15px;
+	padding-left: 8px;
 }
 .input-box input:focus,
 .input-box input:valid {
 	border-color: #3e5151;
+}
+button {
+	color: #fff;
+	border-radius: 5px;
+	/* height: 30px; */
+	background-color: #3e5151;
+	/* margin-top: 10px; */
+	height: 40px;
+}
+button:hover {
+	cursor: pointer;
+	background-color: #394848;
 }
 </style>
