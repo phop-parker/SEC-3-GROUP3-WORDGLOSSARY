@@ -58,8 +58,9 @@ const newFullWord = computed(() => {
 <style scoped>
 form {
 	width: 500px;
-	padding-top: 15px;
+	/* padding-top: px; */
 	display: flex;
+	margin-bottom: 15px;
 }
 /* form .input-boxes {
 	margin-top: 50px;
@@ -77,9 +78,10 @@ form .input-box {
 .input-box input {
 	height: 100%;
 	width: 250px;
-	font-size: 14px;
+	/* font-size: 14px; */
 	outline: none;
-	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.329);
 	/* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
 	margin-right: 15px;
 	padding-left: 8px;
@@ -92,12 +94,17 @@ button {
 	color: #fff;
 	border-radius: 5px;
 	/* height: 30px; */
-	background-color: #3e5151;
+	/* background-color: #3e5151; */
+	background-color: #9e8e6c;
 	/* margin-top: 10px; */
 	height: 40px;
 }
 button:hover {
 	cursor: pointer;
-	background-color: #394848;
+	/* background-color: #394848; */
+	background-color: #b3a17b;
 }
+/* ::placeholder {
+	color: lightgray;
+} */
 </style>

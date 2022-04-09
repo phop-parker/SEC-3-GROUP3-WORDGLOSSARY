@@ -1,8 +1,6 @@
 <script setup>
 // import BaseWordListPageBtn from './components/BaseWordListPageBtn.vue'
 // import BaseRandomPageBtn from './components/BaseRandomPageBtn.vue'
-import { ref } from 'vue'
-const page = ref('wordListPage')
 </script>
 
 <template>
@@ -22,6 +20,7 @@ const page = ref('wordListPage')
 				<router-view></router-view>
 			</div>
 		</div>
+		<a href="#" @click="scrollToTop()" class="top">Back to Top &#8593;</a>
 	</div>
 </template>
 
@@ -44,14 +43,14 @@ body {
 #menu {
 	/* background-color: aqua;
 	height: 40px; */
-
+	margin-top: 50px;
 	display: flex;
 }
 #container {
 	/* position: relative; */
 	width: 100%;
-	min-width: 750px;
-	min-height: 300px;
+	min-width: 800px;
+	min-height: 480px;
 	height: auto;
 	background: #fff;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -66,6 +65,7 @@ body {
 	/* border: 5px solid #3e5151; */
 	/* border: 5px solid #3e5151; */
 	/* border: 5px solid #decba4; */
+	margin-bottom: 60px;
 }
 
 .menu {
@@ -109,5 +109,20 @@ a.router-link-active div {
 }
 a.router-link-active div:hover {
 	background-color: #394848;
+}
+.top {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	padding: 10px;
+	color: #fff;
+	background-color: rgb(62, 81, 81, 0.3);
+	border-radius: 20px;
+	margin-left: 800px;
+	opacity: 10px;
+}
+.top:hover {
+	background-color: #4f6464;
+	cursor: pointer;
 }
 </style>

@@ -10,7 +10,6 @@ defineProps({
 
 <template>
 	<div>
-		<input id="filterWord" placeholder="Filter by Word or Meanning..." />
 		<div class="table">
 			<table class="content-table">
 				<thead>
@@ -26,9 +25,15 @@ defineProps({
 						<td>{{ index + 1 }} )</td>
 						<td>{{ fullWord.word }}</td>
 						<td>{{ fullWord.meaning }}</td>
-						<td><button @click="$emit('edit', fullWord)">Edit</button></td>
 						<td>
-							<button @click="$emit('delete', fullWord.id)">Delete</button>
+							<span id="remove" @click="$emit('edit', fullWord)">
+								<i class="fa fa-pencil"></i>
+							</span>
+						</td>
+						<td>
+							<span id="remove" @click="$emit('delete', fullWord.id)">
+								<i class="fa fa-trash-o"></i>
+							</span>
 						</td>
 					</tr>
 				</tbody>
@@ -43,14 +48,12 @@ table {
 	border: 1px solid black;
 	border-radius: 5px 5px 5px 5px;
 }
-th {
-	padding: 12px 15px;
-	text-align: center;
-}
+th,
 td {
-	align-items: center;
+	padding: 10px 10px;
 	text-align: center;
 }
+
 tbody tr:nth-of-type(even) {
 	background-color: #f0f0f0;
 }
@@ -60,14 +63,18 @@ thead tr {
 	color: white;
 	font-weight: bold;
 }
-#filterWord {
-	min-width: 590px;
-	/* margin-top: 35px; */
-	margin-bottom: 15px;
-	outline: none;
-	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-	padding-bottom: 10px;
-	padding-left: 10px;
+#remove {
+	/* width: 20px; */
+	/* height: 20px; */
+	border-radius: 50%;
+	background-color: #e6e6e6;
+	margin-top: 10px;
+	padding: 4px;
+	/* padding-top: 5px; */
+}
+#remove:hover {
+	background-color: #c0b49b;
+	cursor: pointer;
+	color: white;
 }
 </style>

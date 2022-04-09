@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref, computed } from 'vue'
 import ShowWords from '../components/ShowWords.vue'
 import CreateEditWord from '../components/CreateEditWord.vue'
 
@@ -14,6 +14,17 @@ const getFullWords = async () => {
 	}
 }
 onBeforeMount(async () => await getFullWords())
+
+const keyWord = ref('')
+const filterWords = computed(() => {
+	// getFullWords()
+	return fullWords.value.filter(
+		(fullWord) =>
+			fullWord.word.toLowerCase().includes(keyWord.value.toLowerCase()) ||
+			fullWord.meaning.includes(keyWord.value)
+	)
+})
+
 //DELETE
 const deletefullWord = async (deleteWordId) => {
 	const res = await fetch(`http://localhost:5000/fullWords/${deleteWordId}`, {
@@ -71,17 +82,47 @@ const updateWord = async (replaceWord) => {
 
 <template>
 	<div>
-		<ShowWords
-			:fullWords="fullWords"
-			@delete="deletefullWord"
-			@edit="toEditMode"
-		/>
+		<div id="filterWord">
+			<input
+				id="filterInput"
+				placeholder="Filter by Word or Meanning..."
+				v-model="keyWord"
+			/>
+			<i class="fa fa-search"></i>
+		</div>
+
 		<CreateEditWord
 			@addWord="addFullWord"
 			:currentWord="editingWord"
 			@updateWord="updateWord"
 		/>
+		<ShowWords
+			:fullWords="filterWords"
+			@delete="deletefullWord"
+			@edit="toEditMode"
+		/>
 	</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#filterInput {
+	/* margin-top: 35px; */
+	outline: none;
+	border: none;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+::placeholder {
+	color: lightgray;
+}
+#filterWord {
+	min-width: 590px;
+	margin-bottom: 15px;
+	/* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+	border-bottom: 1px solid lightgray;
+}
+i {
+	color: lightgray;
+	margin-left: 400px;
+}
+</style>
