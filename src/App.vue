@@ -10,7 +10,7 @@
 						<li><router-link :to="{ name: 'Home' }">Home</router-link></li>
 						<li><router-link :to="{ name: 'WordList' }">Word List</router-link></li>
 						<li><router-link :to="{ name: 'Random' }">Random</router-link></li>
-						<li><router-link :to="{ name: 'AboutUs' }">About Us</router-link></li>
+						<li><router-link :to="{ name: 'ContactUs' }">Contact Us</router-link></li>
 					</ul>
 				</nav>
 			</div>
