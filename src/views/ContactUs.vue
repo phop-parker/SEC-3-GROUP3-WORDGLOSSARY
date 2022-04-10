@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 import MemberList from '../components/MemberList.vue'
 import ContactUsForm from '../components/ContactUsForm.vue'
 const members = [
@@ -60,16 +60,13 @@ const members = [
 	}
 ]
 
-
-
-
 const msg = ref({})
 const isSuccess = ref(false)
 const toggleSuccess = () => {
-	if(isSuccess.value===false){
-		isSuccess.value=true;
-	}else{
-		isSuccess.value=false;
+	if (isSuccess.value === false) {
+		isSuccess.value = true
+	} else {
+		isSuccess.value = false
 	}
 }
 const sendMessagetoDb = async (msgDetails) => {
@@ -78,16 +75,20 @@ const sendMessagetoDb = async (msgDetails) => {
 		headers: {
 			'content-type': 'application/json'
 		},
-		body: JSON.stringify({ name: msgDetails.name, email: msgDetails.email, message:msgDetails.message })
+		body: JSON.stringify({
+			name: msgDetails.name,
+			email: msgDetails.email,
+			message: msgDetails.message
+		})
 	})
 	if (res.status === 201) {
-	isSuccess.value = true;	
-	console.log('message sent successfully')
+		isSuccess.value = true
+		console.log('message sent successfully')
 	} else {
 		console.log('error,cannot add data')
 	}
-	msg.value={};
-	setTimeout(toggleSuccess,3500)
+	msg.value = {}
+	setTimeout(toggleSuccess, 2000)
 }
 </script>
 
@@ -98,7 +99,11 @@ const sendMessagetoDb = async (msgDetails) => {
 				<MemberList :membersList="members" />
 			</div>
 			<div class="col-2">
-				<ContactUsForm @sendMessage="sendMessagetoDb" :contactUs="msg" :status="isSuccess"/>
+				<ContactUsForm
+					@sendMessage="sendMessagetoDb"
+					:contactUs="msg"
+					:status="isSuccess"
+				/>
 			</div>
 		</div>
 	</div>

@@ -6,24 +6,24 @@ import CreateEditWord from '../components/CreateEditWord.vue'
 const fullWords = ref([])
 //GET
 const getFullWords = async () => {
-    const res = await fetch('http://localhost:5000/fullWords')
-    if (res.status === 200) {
-        fullWords.value = await res.json()
-    } else {
-        console.log('error,cannot get data')
-    }
+	const res = await fetch('http://localhost:5000/fullWords')
+	if (res.status === 200) {
+		fullWords.value = await res.json()
+	} else {
+		console.log('error,cannot get data')
+	}
 }
 
 onBeforeMount(async () => await getFullWords())
 
 const keyWord = ref('')
 const filterWords = computed(() => {
-    // getFullWords()
-    return fullWords.value.filter(
-        (fullWord) =>
-            fullWord.word.toLowerCase().includes(keyWord.value.toLowerCase()) ||
-            fullWord.meaning.includes(keyWord.value)
-    )
+	// getFullWords()
+	return fullWords.value.filter(
+		(fullWord) =>
+			fullWord.word.toLowerCase().includes(keyWord.value.toLowerCase()) ||
+			fullWord.meaning.includes(keyWord.value)
+	)
 })
 
 //DELETE
@@ -40,38 +40,33 @@ const deletefullWord = async (deleteWordId) => {
 
 // DELETE SELECT
 const deleteSelectedWord = async (deleteWordsId) => {
-for (let i = 0; i < deleteWordsId.length; i++) {
-  const deleteWordId = deleteWordsId[i];
-	const res = await fetch(`http://localhost:5000/fullWords/${deleteWordId}`, {
-		method: 'DELETE'
-	})
-	if (res.status === 200) {
-		fullWords.value = fullWords.value.filter((word) => word.id !== deleteWordId)
-	} else {
-		console.log('error,cannot delete data')
+	for (let i = 0; i < deleteWordsId.length; i++) {
+		const deleteWordId = deleteWordsId[i]
+		const res = await fetch(`http://localhost:5000/fullWords/${deleteWordId}`, {
+			method: 'DELETE'
+		})
+		if (res.status === 200) {
+			fullWords.value = fullWords.value.filter((word) => word.id !== deleteWordId)
+		} else {
+			console.log('error,cannot delete data')
+		}
 	}
-}
 }
 
-//0,1,2,3,4,5,6,7,8,9
-const removeAll = async () => { 	
-console.log('total lemght '+fullWords.value.length)
-for (let i = 0; i < fullWords.value.length; i++) {
-	console.log('in for loop '+i+' value: '+fullWords.value[i])
-  const deleteWordId = fullWords.value[i].id;
-  console.log('removing '+deleteWordId)
-	const res = await fetch(`http://localhost:5000/fullWords/${deleteWordId}`, {
-		method: 'DELETE'
-		
-	})
-	if (res.status === 200) {
-		console.log(deleteWordId +' removed')
-		fullWords.value = fullWords.value.filter((word) => word.id !== deleteWordId)
-	} else {
-		console.log(deleteWordId + 'error,cannot delete data')
+//DELETE ALL
+const deleteAll = async () => {
+	for (let i = 0; i < fullWords.value.length; i++) {
+		const deleteWordId = fullWords.value[i].id
+		const res = await fetch(`http://localhost:5000/fullWords/${deleteWordId}`, {
+			method: 'DELETE'
+		})
+		if (res.status === 200) {
+			console.log(deleteWordId + ' removed')
+		} else {
+			console.log(deleteWordId + 'error,cannot delete data')
+		}
 	}
-}
-	
+	fullWords.value = []
 }
 //POST
 const addFullWord = async (newFullWord) => {
@@ -120,7 +115,6 @@ const updateWord = async (replaceWord) => {
 
 <template>
 	<div>
-{{fullWords}}
 		<div id="filterWord">
 			<input
 				id="filterInput"
@@ -142,7 +136,7 @@ const updateWord = async (replaceWord) => {
 				@delete="deletefullWord"
 				@edit="toEditMode"
 				@deleteSelected="deleteSelectedWord"
-				@deleteAll="removeAll()"
+				@deleteAll="deleteAll"
 			/>
 		</div>
 	</div>
