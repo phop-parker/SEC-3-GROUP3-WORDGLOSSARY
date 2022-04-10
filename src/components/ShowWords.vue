@@ -1,11 +1,22 @@
 <script setup>
-defineEmits(['delete', 'edit'])
+import {ref} from 'vue'
+defineEmits(['delete', 'edit','deleteSelected','deleteAll'])
 defineProps({
 	fullWords: {
 		type: Array,
 		require: true
 	}
 })
+const selectedItems = ref([]);
+const isSelectBox = ref(false)
+const boxToggle = () => {
+	if (!isSelectBox.value) {
+		isSelectBox.value = true
+	} else {
+		isSelectBox.value = false
+		selectedItems.value = []
+	}
+}
 </script>
 
 <template>
@@ -13,7 +24,8 @@ defineProps({
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">NO.</th>
+					<th scope="col" v-if="isSelectBox">Select</th>
+					<th scope="col" v-else>NO.</th>
 					<th scope="col">Word</th>
 					<th scope="col">Meaning</th>
 					<th scope="col" colspan="2"></th>
@@ -21,7 +33,14 @@ defineProps({
 			</thead>
 			<tbody>
 				<tr v-for="(fullWord, index) in fullWords" :key="index">
-					<td scop="row">{{ index + 1 }} )</td>
+						<td v-if="isSelectBox"><input
+                        type="checkbox"
+                        :value="fullWord.id"
+                        v-model="selectedItems"
+                      />
+					  </td>
+					  <td scop="row" v-else>{{ index + 1 }} </td>
+				
 					<td>{{ fullWord.word }}</td>
 					<td>{{ fullWord.meaning }}</td>
 					<td>
@@ -37,6 +56,13 @@ defineProps({
 				</tr>
 			</tbody>
 		</table>
+		<div v-if="!isSelectBox">
+			<span @click="boxToggle()">Select</span>
+		</div>
+		<div v-else>
+			<button @click="$emit('deleteSelected', selectedItems)">delete selected</button>
+			<button @click="$emit('deleteAll')">delete all</button>
+		</div>
 	</div>
 </template>
 

@@ -15,7 +15,7 @@
 					able to write the meanings of random words to check for accuracy and review
 					memory.
 				</p>
-				<button>Let's Add Words</button>
+				<router-link :to="{ name: 'WordList' }"><button>Let's Add Words</button></router-link>
 			</div>
 			<div class="col-2">
 				<img src="../assets/stack.png" class="stack" />
