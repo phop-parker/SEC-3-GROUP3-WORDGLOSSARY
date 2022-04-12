@@ -122,4 +122,13 @@ button:hover {
 /* ::placeholder {
 	color: lightgray;
 } */
+@media screen and (max-width: 600px) {
+	.input-boxes {
+		width: 470px;
+		display: block;
+	}
+	button {
+		margin-top: 10px;
+	}
+}
 </style>

@@ -62,13 +62,11 @@ const members = [
 
 const msg = ref({})
 const isSuccess = ref(false)
-const toggleSuccess = () => {
-	if (isSuccess.value === false) {
-		isSuccess.value = true
-	} else {
-		isSuccess.value = false
-	}
-}
+const toggleSuccess = () =>
+	isSuccess.value === false
+		? (isSuccess.value = true)
+		: (isSuccess.value = false)
+
 const sendMessagetoDb = async (msgDetails) => {
 	const res = await fetch(`http://localhost:5000/message`, {
 		method: 'POST',

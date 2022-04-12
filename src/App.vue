@@ -86,4 +86,9 @@ nav ul li a:hover {
 	);
 	cursor: pointer;
 }
+@media screen and (max-width: 800px) {
+	nav ul {
+		margin-left: -2px;
+	}
+}
 </style>

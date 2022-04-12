@@ -1,13 +1,13 @@
 <script setup>
-import {ref} from 'vue'
-defineEmits(['delete', 'edit','deleteSelected','deleteAll'])
+import { ref } from 'vue'
+defineEmits(['delete', 'edit', 'deleteSelected', 'deleteAll'])
 defineProps({
 	fullWords: {
 		type: Array,
 		require: true
 	}
 })
-const selectedItems = ref([]);
+const selectedItems = ref([])
 const isSelectBox = ref(false)
 const boxToggle = () => {
 	if (!isSelectBox.value) {
@@ -33,14 +33,11 @@ const boxToggle = () => {
 			</thead>
 			<tbody>
 				<tr v-for="(fullWord, index) in fullWords" :key="index">
-						<td v-if="isSelectBox"><input
-                        type="checkbox"
-                        :value="fullWord.id"
-                        v-model="selectedItems"
-                      />
-					  </td>
-					  <td scop="row" v-else>{{ index + 1 }} </td>
-				
+					<td v-if="isSelectBox">
+						<input type="checkbox" :value="fullWord.id" v-model="selectedItems" />
+					</td>
+					<td scop="row" v-else>{{ index + 1 }}</td>
+
 					<td>{{ fullWord.word }}</td>
 					<td>{{ fullWord.meaning }}</td>
 					<td>
@@ -56,19 +53,80 @@ const boxToggle = () => {
 				</tr>
 			</tbody>
 		</table>
-		<div v-if="!isSelectBox">
-			<span @click="boxToggle()">Select</span>
+		<div v-if="!isSelectBox" class="select-mode">
+			<span class="select" @click="boxToggle()">Select Multiple Word</span>
 		</div>
-		<div v-else>
-			<button @click="$emit('deleteSelected', selectedItems)">delete selected</button>
-			<button @click="$emit('deleteAll')">delete all</button>
+		<div v-else class="select-mode">
+			<button class="delete" @click="$emit('deleteSelected', selectedItems)">
+				Delete Selected
+			</button>
+			<button class="delete" @click="$emit('deleteAll')">Delete All</button>
+			<button class="back" @click="boxToggle()">Back</button>
 		</div>
 	</div>
 </template>
 
 <style scoped>
+.back {
+	color: #fff;
+	border-radius: 5px;
+	background: linear-gradient(
+		90deg,
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	);
+	margin-left: 15px;
+	height: 35px;
+	border-radius: 6px;
+	outline: none;
+	border: 0;
+}
+
+.select-mode {
+	float: right;
+}
+
+.back:hover {
+	cursor: pointer;
+	background: linear-gradient(
+		90deg,
+		rgb(102, 137, 137) 0%,
+		rgb(50, 66, 66) 100%
+	);
+}
+.delete {
+	background: linear-gradient(90deg, rgb(226, 20, 20) 0%, rgb(156, 39, 39) 100%);
+	color: #fff;
+	border-radius: 5px;
+	margin-left: 15px;
+	height: 35px;
+	border-radius: 6px;
+	outline: none;
+	border: 0;
+}
+.delete:hover {
+	background: linear-gradient(90deg, rgb(225, 40, 40) 0%, rgb(125, 25, 25) 100%);
+	cursor: pointer;
+}
+.select {
+	padding: 5px;
+	border-radius: 10px;
+	background: whitesmoke;
+}
+.select:hover {
+	cursor: pointer;
+	background: linear-gradient(
+		90deg,
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	);
+	padding: 5px;
+	border-radius: 10px;
+	color: #fff;
+}
 table {
 	margin-top: 30px;
+	margin-bottom: 40px;
 }
 th,
 td {

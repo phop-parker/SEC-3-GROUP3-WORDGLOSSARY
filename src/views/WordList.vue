@@ -70,14 +70,23 @@ const deleteAll = async () => {
 }
 //POST
 const hasNullInput = ref(false)
+const isAddSuccess = ref(false)
+const toggleAddSuccess = () =>
+	isAddSuccess.value === false
+		? (isAddSuccess.value = true)
+		: (isAddSuccess.value = false)
+const checkNull = () =>
+	hasNullInput.value === true
+		? (hasNullInput.value = false)
+		: (hasNullInput.value = true)
+
 const addFullWord = async (newFullWord) => {
-	console.log('out-------')
-	console.log('type ' + typeof newFullWord.word)
-	console.log('type ' + typeof newFullWord.meaning)
 	if (newFullWord.word === undefined || newFullWord.word === '') {
 		hasNullInput.value = true
+		setTimeout(checkNull, 3000)
 	} else if (newFullWord.meaning === undefined || newFullWord.meaning === '') {
 		hasNullInput.value = true
+		setTimeout(checkNull, 3000)
 	} else {
 		const res = await fetch(`http://localhost:5000/fullWords`, {
 			method: 'POST',
@@ -90,13 +99,14 @@ const addFullWord = async (newFullWord) => {
 			})
 		})
 		if (res.status === 201) {
+			isAddSuccess.value = true
 			const addedWord = await res.json()
 			fullWords.value.push(addedWord)
 		} else {
 			console.log('error,cannot add data')
 		}
 		editingWord.value = {}
-		hasNullInput.value = false
+		setTimeout(toggleAddSuccess, 3000)
 	}
 }
 
@@ -108,8 +118,10 @@ const toEditMode = (editWord) => {
 const updateWord = async (replaceWord) => {
 	if (replaceWord.word === undefined || replaceWord.word === '') {
 		hasNullInput.value = true
+		setTimeout(checkNull, 3000)
 	} else if (replaceWord.meaning === undefined || replaceWord.meaning === '') {
 		hasNullInput.value = true
+		setTimeout(checkNull, 3000)
 	} else {
 		const res = await fetch(`http://localhost:5000/fullWords/${replaceWord.id}`, {
 			method: 'PUT',
@@ -132,7 +144,6 @@ const updateWord = async (replaceWord) => {
 			console.log('error,cannot edit data')
 		}
 		editingWord.value = {}
-		hasNullInput.value = false
 	}
 }
 </script>
@@ -146,7 +157,7 @@ const updateWord = async (replaceWord) => {
 				v-model="keyWord"
 			/>
 			<i class="fa fa-search"></i>
-			<p v-show="hasNullInput">Please enter word and meaning</p>
+
 			<div class="form">
 				<CreateEditWord
 					@addWord="addFullWord"
@@ -155,6 +166,12 @@ const updateWord = async (replaceWord) => {
 				/>
 			</div>
 		</div>
+		<p class="null-alert" v-show="hasNullInput">
+			Please enter both word and meaning input.
+		</p>
+		<p class="success-alert" v-show="isAddSuccess">
+			Add new word and meaning successfully.
+		</p>
 		<div class="showWord">
 			<ShowWords
 				:fullWords="filterWords"
@@ -168,6 +185,15 @@ const updateWord = async (replaceWord) => {
 </template>
 
 <style scoped>
+.success-alert {
+	color: green;
+	margin-left: 56%;
+}
+.null-alert {
+	color: red;
+	/* text-align: right; */
+	margin-left: 56%;
+}
 .showWord {
 	/* margin-top: -5%; */
 	position: relative;
@@ -211,21 +237,30 @@ i {
 	/* margin-left: 200px; */
 	margin-top: 10px;
 }
-.row {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 100px 0;
-}
-.col-1 {
-	/* flex-basis: 50%; */
-	position: relative;
-	margin-left: 50px;
-}
-.col-2 {
-	position: relative;
-	flex-basis: 60%;
-	display: flex;
-	align-items: center;
+@media screen and (max-width: 800px) {
+	#filterWord {
+		display: block;
+	}
+	#filterInput {
+		width: 400px;
+	}
+	.form {
+		margin-left: 0px;
+		margin-top: 2%;
+	}
+	.showWord {
+		margin-top: 15%;
+	}
+
+	.success-alert {
+		margin-left: 80px;
+		margin-top: 15px;
+		margin-bottom: -38px;
+	}
+	.null-alert {
+		margin-left: 80px;
+		margin-top: 15px;
+		margin-bottom: -38px;
+	}
 }
 </style>
