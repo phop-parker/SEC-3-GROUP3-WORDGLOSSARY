@@ -1,88 +1,72 @@
 {
   "fullWords": [
     {
-      "word": "ffsdfdsfdf",
-      "meaning": "dsfdf",
+      "word": "gfdgfg",
+      "meaning": "gfdgf",
       "id": 1
     },
     {
-      "word": "ff",
-      "meaning": "fffff",
+      "word": "dd",
+      "meaning": "dd",
       "id": 2
     },
     {
+      "word": "vdsvdd",
+      "meaning": "vsvd",
       "id": 3
     },
     {
-      "word": "fffff",
-      "meaning": "f",
+      "word": "v2",
+      "meaning": "v",
       "id": 4
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "ffff",
+      "meaning": "fff",
       "id": 5
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "dd",
+      "meaning": "ff",
       "id": 6
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "dd",
+      "meaning": "dd",
       "id": 7
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "fff",
+      "meaning": "fff",
       "id": 8
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
-      "id": 9
-    },
-    {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "dd",
+      "meaning": "dd",
       "id": 10
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "fdfsfdsfd",
+      "meaning": "fdsfd",
       "id": 11
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "fd",
+      "meaning": "fdfd",
       "id": 12
     },
     {
-      "word": "fffff",
-      "meaning": "ffff",
+      "word": "cdcdc",
+      "meaning": "cdcd",
       "id": 13
-    },
-    {
-      "word": "fffff",
-      "meaning": "ffff",
-      "id": 14
-    },
-    {
-      "word": "fffff",
-      "meaning": "ffff",
-      "id": 15
-    },
-    {
-      "word": "fffff",
-      "meaning": "ffff",
-      "id": 16
-    },
-    {
-      "word": "fffff",
-      "meaning": "ffff",
-      "id": 17
     }
   ],
-  "message": []
+  "message": [
+    {
+      "name": "vdvfdg",
+      "email": "gfdgf",
+      "message": "gfdg",
+      "id": 1
+    }
+  ]
 }

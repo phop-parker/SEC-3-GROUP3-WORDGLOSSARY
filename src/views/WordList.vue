@@ -69,21 +69,35 @@ const deleteAll = async () => {
 	fullWords.value = []
 }
 //POST
+const hasNullInput = ref(false)
 const addFullWord = async (newFullWord) => {
-	const res = await fetch(`http://localhost:5000/fullWords`, {
-		method: 'POST',
-		headers: {
-			'content-type': 'application/json'
-		},
-		body: JSON.stringify({ word: newFullWord.word, meaning: newFullWord.meaning })
-	})
-	if (res.status === 201) {
-		const addedWord = await res.json()
-		fullWords.value.push(addedWord)
+	console.log('out-------')
+	console.log('type ' + typeof newFullWord.word)
+	console.log('type ' + typeof newFullWord.meaning)
+	if (newFullWord.word === undefined || newFullWord.word === '') {
+		hasNullInput.value = true
+	} else if (newFullWord.meaning === undefined || newFullWord.meaning === '') {
+		hasNullInput.value = true
 	} else {
-		console.log('error,cannot add data')
+		const res = await fetch(`http://localhost:5000/fullWords`, {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				word: newFullWord.word,
+				meaning: newFullWord.meaning
+			})
+		})
+		if (res.status === 201) {
+			const addedWord = await res.json()
+			fullWords.value.push(addedWord)
+		} else {
+			console.log('error,cannot add data')
+		}
+		editingWord.value = {}
+		hasNullInput.value = false
 	}
-	editingWord.value = {}
 }
 
 //PUT
@@ -92,24 +106,34 @@ const toEditMode = (editWord) => {
 	return (editingWord.value = editWord)
 }
 const updateWord = async (replaceWord) => {
-	const res = await fetch(`http://localhost:5000/fullWords/${replaceWord.id}`, {
-		method: 'PUT',
-		headers: {
-			'content-type': 'application/json'
-		},
-		body: JSON.stringify({ word: replaceWord.word, meaning: replaceWord.meaning })
-	})
-	if (res.status === 200) {
-		const editedWord = await res.json()
-		fullWords.value = fullWords.value.map((word) =>
-			word.id === editedWord.id
-				? { ...word, word: editedWord.word, meaning: editedWord.meaning }
-				: word
-		)
+	if (replaceWord.word === undefined || replaceWord.word === '') {
+		hasNullInput.value = true
+	} else if (replaceWord.meaning === undefined || replaceWord.meaning === '') {
+		hasNullInput.value = true
 	} else {
-		console.log('error,cannot edit data')
+		const res = await fetch(`http://localhost:5000/fullWords/${replaceWord.id}`, {
+			method: 'PUT',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				word: replaceWord.word,
+				meaning: replaceWord.meaning
+			})
+		})
+		if (res.status === 200) {
+			const editedWord = await res.json()
+			fullWords.value = fullWords.value.map((word) =>
+				word.id === editedWord.id
+					? { ...word, word: editedWord.word, meaning: editedWord.meaning }
+					: word
+			)
+		} else {
+			console.log('error,cannot edit data')
+		}
+		editingWord.value = {}
+		hasNullInput.value = false
 	}
-	editingWord.value = {}
 }
 </script>
 
@@ -122,6 +146,7 @@ const updateWord = async (replaceWord) => {
 				v-model="keyWord"
 			/>
 			<i class="fa fa-search"></i>
+			<p v-show="hasNullInput">Please enter word and meaning</p>
 			<div class="form">
 				<CreateEditWord
 					@addWord="addFullWord"
