@@ -69,7 +69,6 @@ const boxToggle = () => {
 <style scoped>
 .back {
 	color: #fff;
-	border-radius: 5px;
 	background: linear-gradient(
 		90deg,
 		rgba(113, 153, 153, 1) 0%,

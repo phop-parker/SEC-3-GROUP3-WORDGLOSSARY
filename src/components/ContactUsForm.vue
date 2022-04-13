@@ -76,7 +76,7 @@ const msgDetails = computed(() => {
 
 .input {
 	outline: none;
-	width: 300px;
+	width: 400px;
 	border: 1px solid rgba(0, 0, 0, 0.329);
 	font-size: 18px;
 	margin-bottom: 10px;

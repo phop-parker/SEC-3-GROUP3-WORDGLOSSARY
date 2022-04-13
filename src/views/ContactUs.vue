@@ -104,6 +104,7 @@ const sendMessagetoDb = async (msgDetails) => {
 					:contactUs="msg"
 					:status="isSuccess"
 				/>
+				<img src="../assets/reading-book.jpg" />
 			</div>
 		</div>
 	</div>
@@ -121,16 +122,23 @@ const sendMessagetoDb = async (msgDetails) => {
 	flex-basis: 45%;
 	position: relative;
 	/* margin-left: 50px; */
+	/* padding-left: 10%; */
 }
 .col-2 {
 	position: relative;
 	flex-basis: 50%;
 	/* display: flex; */
 	/* align-items: center; */
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
 	/* background-color: aqua; */
+	/* text-align: center; */
+	padding-left: 10%;
+}
+.col-2 img {
+	width: 100%;
+	/* text-align: center; */
 }
 .col-1 h4 {
 	margin-bottom: 3%;
