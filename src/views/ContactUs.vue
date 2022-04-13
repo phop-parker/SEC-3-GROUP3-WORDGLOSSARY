@@ -67,7 +67,30 @@ const toggleSuccess = () =>
 		? (isSuccess.value = true)
 		: (isSuccess.value = false)
 
+const resetFailedSubmit = () => {
+	failedSubmit.value = ""
+}
+
+const failedSubmit = ref()
 const sendMessagetoDb = async (msgDetails) => {
+	if(msgDetails.name == undefined && msgDetails.email == undefined&&msgDetails.message==undefined){
+	failedSubmit.value = 'allMessageDetail'
+	console.log(failedSubmit.value)
+	setTimeout(resetFailedSubmit,3000)
+	}
+	else if(msgDetails.name==undefined||msgDetails.name==''){
+	failedSubmit.value = 'name'
+	console.log(failedSubmit.value)
+	setTimeout(resetFailedSubmit,3000)
+	}else if(msgDetails.email==undefined||msgDetails.email==''){
+	failedSubmit.value = 'email'
+	console.log(failedSubmit.value)
+	setTimeout(resetFailedSubmit,3000)
+	}else if(msgDetails.message==undefined||msgDetails.message==''){
+	failedSubmit.value = 'message'
+	console.log(failedSubmit.value)
+	setTimeout(resetFailedSubmit,3000)
+	}else{
 	const res = await fetch(`http://localhost:5000/message`, {
 		method: 'POST',
 		headers: {
@@ -88,6 +111,7 @@ const sendMessagetoDb = async (msgDetails) => {
 	msg.value = {}
 	setTimeout(toggleSuccess, 2000)
 }
+}
 </script>
 
 <template>
@@ -103,6 +127,7 @@ const sendMessagetoDb = async (msgDetails) => {
 					@sendMessage="sendMessagetoDb"
 					:contactUs="msg"
 					:status="isSuccess"
+					:failed="failedSubmit"
 				/>
 				<img src="../assets/reading-book.jpg" />
 			</div>

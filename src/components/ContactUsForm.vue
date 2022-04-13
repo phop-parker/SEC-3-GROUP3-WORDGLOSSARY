@@ -10,10 +10,16 @@ const props = defineProps({
 	status: {
 		type: Boolean,
 		default: false
+	},
+	failed:{
+		type:String,
+		default:""
 	}
 })
 
+
 const isSuccess = computed(() => props.status)
+const isFailed = computed(()=> props.failed)
 const msgDetails = computed(() => {
 	return {
 		name: props.contactUs.name,
@@ -28,7 +34,7 @@ const msgDetails = computed(() => {
 		<div class="form-container">
 			<h4>Send Message</h4>
 			<div>
-				<p class="label">Full Name</p>
+				<p class="label">Full Name *</p>
 				<input
 					class="input"
 					type="text"
@@ -37,7 +43,7 @@ const msgDetails = computed(() => {
 				/>
 			</div>
 			<div>
-				<p class="label">Email</p>
+				<p class="label">Email *</p>
 				<input
 					class="input"
 					type="text"
@@ -46,24 +52,36 @@ const msgDetails = computed(() => {
 				/>
 			</div>
 			<div>
-				<p class="label">Message</p>
+				<p class="label">Message *</p>
 				<textarea
 					class="input"
 					placeholder="type your message here"
 					v-model="msgDetails.message"
 				></textarea>
 			</div>
-			<div>
+			<div class="btnStatus">
 				<button class="submitBtn" @click="$emit('sendMessage', msgDetails)">
 					Submit
 				</button>
-				<h4 v-show="isSuccess">message sent successfully</h4>
+				<h5 v-show="isSuccess">message sent successfully</h5>
+				<div class="failed">
+				<h5 v-show="isFailed=='allMessageDetail'">Please type in the input first</h5>
+				<h5 v-show="isFailed=='name'">Please insert your name first</h5>
+				<h5 v-show="isFailed=='email'">Please insert your email first</h5>
+				<h5 v-show="isFailed=='message'">Please insert message first</h5>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style scoped>
+.failed{
+	color: red;
+}
+.btnStatus{
+	display: inline-flex;
+}
 .label {
 	color: rgb(219, 33, 0);
 	font-weight: 500;
@@ -103,6 +121,7 @@ const msgDetails = computed(() => {
 	border-radius: 6px;
 	outline: none;
 	border: 0;
+	margin-right: 5px;
 }
 .submitBtn:hover {
 	cursor: pointer;
