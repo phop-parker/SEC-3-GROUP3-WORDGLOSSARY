@@ -97,7 +97,9 @@ const sendMessagetoDb = async (msgDetails) => {
 				<MemberList :membersList="members" />
 			</div>
 			<div class="col-2">
+				<!-- <div class="color-box"></div> -->
 				<ContactUsForm
+					class="contactUs-form"
 					@sendMessage="sendMessagetoDb"
 					:contactUs="msg"
 					:status="isSuccess"
@@ -113,6 +115,7 @@ const sendMessagetoDb = async (msgDetails) => {
 	justify-content: space-between;
 	align-items: center;
 	/* margin: 100px 0; */
+	/* background-color: aqua; */
 }
 .col-1 {
 	flex-basis: 45%;
@@ -122,11 +125,17 @@ const sendMessagetoDb = async (msgDetails) => {
 .col-2 {
 	position: relative;
 	flex-basis: 50%;
-	/* display: flex;
-	align-items: center; */
+	/* display: flex; */
+	/* align-items: center; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* background-color: aqua; */
 }
 .col-1 h4 {
 	margin-bottom: 3%;
 	text-align: center;
+}
+@media screen and (max-width: 800px) {
 }
 </style>

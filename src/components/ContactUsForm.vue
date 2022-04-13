@@ -1,5 +1,5 @@
 <script setup>
-import {computed} from 'vue'
+import { computed } from 'vue'
 defineEmits(['sendMessage'])
 
 const props = defineProps({
@@ -7,13 +7,13 @@ const props = defineProps({
 		type: Object,
 		default: {}
 	},
-		status: {
+	status: {
 		type: Boolean,
 		default: false
-	},
+	}
 })
 
-const isSuccess = computed (()=> props.status)
+const isSuccess = computed(() => props.status)
 const msgDetails = computed(() => {
 	return {
 		name: props.contactUs.name,
@@ -21,38 +21,102 @@ const msgDetails = computed(() => {
 		message: props.contactUs.message
 	}
 })
-
 </script>
 
 <template>
 	<div>
-		<div class="test">
-			<p>Send Message</p>
+		<div class="form-container">
+			<h4>Send Message</h4>
 			<div>
-				<h4>Name</h4>
-				<input type="text" v-model="msgDetails.name">
+				<p class="label">Full Name</p>
+				<input
+					class="input"
+					type="text"
+					v-model="msgDetails.name"
+					placeholder="type your full name here"
+				/>
 			</div>
 			<div>
-				<h4>Email</h4>
-				<input type="text" v-model="msgDetails.email">
+				<p class="label">Email</p>
+				<input
+					class="input"
+					type="text"
+					v-model="msgDetails.email"
+					placeholder="type your email here"
+				/>
 			</div>
 			<div>
-				<h4>Message</h4>
-				<textarea placeholder="type your message here" v-model="msgDetails.message"></textarea>
+				<p class="label">Message</p>
+				<textarea
+					class="input"
+					placeholder="type your message here"
+					v-model="msgDetails.message"
+				></textarea>
 			</div>
 			<div>
-				<button @click="$emit('sendMessage', msgDetails)">submit</button>
+				<button class="submitBtn" @click="$emit('sendMessage', msgDetails)">
+					Submit
+				</button>
 				<h4 v-show="isSuccess">message sent successfully</h4>
 			</div>
-
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.test {
-	background-color: aqua;
-	width: 500px;
-	height: 500px;
+.label {
+	color: rgb(219, 33, 0);
+	font-weight: 500;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+::placeholder {
+	font-size: 14px;
+}
+
+.input {
+	outline: none;
+	width: 300px;
+	border: 1px solid rgba(0, 0, 0, 0.329);
+	font-size: 18px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	padding: 5px;
+}
+.input:focus {
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.submitBtn {
+	color: #fff;
+	border-radius: 5px;
+	/* height: 30px; */
+	/* background-color: #3e5151; */
+	/* background-color: #9e8e6c; */
+	background: linear-gradient(
+		90deg,
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	);
+	/* margin-top: 10px; */
+	height: 40px;
+	border-radius: 6px;
+	outline: none;
+	border: 0;
+}
+.submitBtn:hover {
+	cursor: pointer;
+	/* background-color: #394848; */
+	/* background-color: #b3a17b; */
+	background: linear-gradient(
+		90deg,
+		rgb(102, 137, 137) 0%,
+		rgb(50, 66, 66) 100%
+	);
+}
+@media screen and (max-width: 800px) {
+	.input {
+		width: 100%;
+	}
 }
 </style>

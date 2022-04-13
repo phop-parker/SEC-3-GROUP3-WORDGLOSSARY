@@ -68,13 +68,6 @@ form {
 form .input-box {
 	height: 40px;
 	width: 100%;
-	/* display: flex; */
-	/* align-items: center; */
-	/* justify-content: center; */
-
-	/* align-items: center; */
-
-	/* margin-bottom: 20px; */
 }
 .input-box input {
 	height: 100%;
@@ -88,9 +81,9 @@ form .input-box {
 	padding-left: 8px;
 	/* margin-top: 10px; */
 }
-.input-box input:focus,
-.input-box input:valid {
-	border-color: #3e5151;
+.input-box input:focus {
+	/* border-color: #3e5151; */
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
 button {
 	color: #fff;
