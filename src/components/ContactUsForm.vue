@@ -11,15 +11,14 @@ const props = defineProps({
 		type: Boolean,
 		default: false
 	},
-	failed:{
-		type:String,
-		default:""
+	failed: {
+		type: String,
+		default: ''
 	}
 })
 
-
 const isSuccess = computed(() => props.status)
-const isFailed = computed(()=> props.failed)
+const isFailed = computed(() => props.failed)
 const msgDetails = computed(() => {
 	return {
 		name: props.contactUs.name,
@@ -63,12 +62,14 @@ const msgDetails = computed(() => {
 				<button class="submitBtn" @click="$emit('sendMessage', msgDetails)">
 					Submit
 				</button>
-				<h5 v-show="isSuccess">message sent successfully</h5>
+				<p v-show="isSuccess" class="success-alert">Message sent successfully</p>
 				<div class="failed">
-				<h5 v-show="isFailed=='allMessageDetail'">Please type in the input first</h5>
-				<h5 v-show="isFailed=='name'">Please insert your name first</h5>
-				<h5 v-show="isFailed=='email'">Please insert your email first</h5>
-				<h5 v-show="isFailed=='message'">Please insert message first</h5>
+					<p v-show="isFailed == 'allMessageDetail'">
+						Please type in the input first
+					</p>
+					<p v-show="isFailed == 'name'">Please insert your name first</p>
+					<p v-show="isFailed == 'email'">Please insert your email first</p>
+					<p v-show="isFailed == 'message'">Please insert message first</p>
 				</div>
 			</div>
 		</div>
@@ -76,10 +77,17 @@ const msgDetails = computed(() => {
 </template>
 
 <style scoped>
-.failed{
-	color: red;
+.success-alert {
+	color: green;
+	margin-left: 20px;
+	padding-top: 5px;
 }
-.btnStatus{
+.failed {
+	color: red;
+	margin-left: 20px;
+	padding-top: 5px;
+}
+.btnStatus {
 	display: inline-flex;
 }
 .label {
@@ -91,7 +99,6 @@ const msgDetails = computed(() => {
 ::placeholder {
 	font-size: 14px;
 }
-
 .input {
 	outline: none;
 	width: 400px;
@@ -104,19 +111,14 @@ const msgDetails = computed(() => {
 .input:focus {
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
-
 .submitBtn {
 	color: #fff;
 	border-radius: 5px;
-	/* height: 30px; */
-	/* background-color: #3e5151; */
-	/* background-color: #9e8e6c; */
 	background: linear-gradient(
 		90deg,
 		rgba(113, 153, 153, 1) 0%,
 		rgba(62, 81, 81, 1) 100%
 	);
-	/* margin-top: 10px; */
 	height: 40px;
 	border-radius: 6px;
 	outline: none;
@@ -125,8 +127,6 @@ const msgDetails = computed(() => {
 }
 .submitBtn:hover {
 	cursor: pointer;
-	/* background-color: #394848; */
-	/* background-color: #b3a17b; */
 	background: linear-gradient(
 		90deg,
 		rgb(102, 137, 137) 0%,

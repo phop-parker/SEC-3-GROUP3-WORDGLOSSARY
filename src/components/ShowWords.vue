@@ -80,11 +80,9 @@ const boxToggle = () => {
 	outline: none;
 	border: 0;
 }
-
 .select-mode {
 	float: right;
 }
-
 .back:hover {
 	cursor: pointer;
 	background: linear-gradient(
@@ -144,9 +142,7 @@ tbody tr:nth-of-type(even) {
 	padding: 4px;
 }
 #remove:hover {
-	/* background-color: #c0b49b; */
 	background-color: #e6e6e6;
 	cursor: pointer;
-	/* color: white; */
 }
 </style>

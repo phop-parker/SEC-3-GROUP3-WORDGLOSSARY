@@ -18,7 +18,6 @@ onBeforeMount(async () => await getFullWords())
 
 const keyWord = ref('')
 const filterWords = computed(() => {
-	// getFullWords()
 	return fullWords.value.filter(
 		(fullWord) =>
 			fullWord.word.toLowerCase().includes(keyWord.value.toLowerCase()) ||
@@ -68,26 +67,31 @@ const deleteAll = async () => {
 	}
 	fullWords.value = []
 }
-//POST
+
 const hasNullInput = ref(false)
-const isAddSuccess = ref(false)
-const toggleAddSuccess = () =>
-	isAddSuccess.value === false
-		? (isAddSuccess.value = true)
-		: (isAddSuccess.value = false)
-const checkNull = () =>
+const checkNullInput = (word, mode) => {
+	if (word.word === undefined || word.word === '') {
+		hasNullInput.value = true
+		setTimeout(checkNullToggle, 3000)
+	} else if (word.meaning === undefined || word.meaning === '') {
+		hasNullInput.value = true
+		setTimeout(checkNullToggle, 3000)
+	} else if (mode === 'addMode') {
+		addFullWord(word)
+	} else if (mode === 'editMode') {
+		updateWord(word)
+	}
+}
+const checkNullToggle = () =>
 	hasNullInput.value === true
 		? (hasNullInput.value = false)
 		: (hasNullInput.value = true)
 
+//POST
+const isAddSuccess = ref(false)
 const addFullWord = async (newFullWord) => {
-	if (newFullWord.word === undefined || newFullWord.word === '') {
-		hasNullInput.value = true
-		setTimeout(checkNull, 3000)
-	} else if (newFullWord.meaning === undefined || newFullWord.meaning === '') {
-		hasNullInput.value = true
-		setTimeout(checkNull, 3000)
-	} else {
+	checkDupplicateWord(newFullWord)
+	if (isDupplicateWord.value === false) {
 		const res = await fetch(`http://localhost:5000/fullWords`, {
 			method: 'POST',
 			headers: {
@@ -107,8 +111,32 @@ const addFullWord = async (newFullWord) => {
 		}
 		editingWord.value = {}
 		setTimeout(toggleAddSuccess, 3000)
+	} else {
+		setTimeout(checkDuplicateToggle, 3000)
 	}
 }
+const toggleAddSuccess = () =>
+	isAddSuccess.value === false
+		? (isAddSuccess.value = true)
+		: (isAddSuccess.value = false)
+
+const isDupplicateWord = ref(false)
+const checkDupplicateWord = (word) => {
+	if (fullWords.value.length <= 0) {
+		isDupplicateWord.value = false
+	} else {
+		isDupplicateWord.value = fullWords.value.some(
+			(w) =>
+				w.word.toLowerCase() == word.word.toLowerCase() &&
+				w.meaning.toLowerCase() == word.meaning.toLowerCase()
+		)
+	}
+}
+
+const checkDuplicateToggle = () =>
+	isDupplicateWord.value === true
+		? (isDupplicateWord.value = false)
+		: (isDupplicateWord.value = true)
 
 //PUT
 const editingWord = ref({})
@@ -116,13 +144,8 @@ const toEditMode = (editWord) => {
 	return (editingWord.value = editWord)
 }
 const updateWord = async (replaceWord) => {
-	if (replaceWord.word === undefined || replaceWord.word === '') {
-		hasNullInput.value = true
-		setTimeout(checkNull, 3000)
-	} else if (replaceWord.meaning === undefined || replaceWord.meaning === '') {
-		hasNullInput.value = true
-		setTimeout(checkNull, 3000)
-	} else {
+	checkDupplicateWord(replaceWord)
+	if (isDupplicateWord.value == false) {
 		const res = await fetch(`http://localhost:5000/fullWords/${replaceWord.id}`, {
 			method: 'PUT',
 			headers: {
@@ -144,6 +167,8 @@ const updateWord = async (replaceWord) => {
 			console.log('error,cannot edit data')
 		}
 		editingWord.value = {}
+	} else {
+		setTimeout(checkDuplicateToggle, 3000)
 	}
 }
 </script>
@@ -160,14 +185,17 @@ const updateWord = async (replaceWord) => {
 
 			<div class="form">
 				<CreateEditWord
-					@addWord="addFullWord"
+					@addWord="checkNullInput($event, 'addMode')"
 					:currentWord="editingWord"
-					@updateWord="updateWord"
+					@updateWord="checkNullInput($event, 'editMode')"
 				/>
 			</div>
 		</div>
-		<p class="null-alert" v-show="hasNullInput">
+		<p class="fail-alert" v-show="hasNullInput">
 			Please enter both word and meaning input.
+		</p>
+		<p class="fail-alert" v-show="isDupplicateWord">
+			You already have this word.
 		</p>
 		<p class="success-alert" v-show="isAddSuccess">
 			Add new word and meaning successfully.
@@ -189,37 +217,21 @@ const updateWord = async (replaceWord) => {
 	color: green;
 	margin-left: 56%;
 }
-.null-alert {
+.fail-alert {
 	color: red;
-	/* text-align: right; */
 	margin-left: 56%;
 }
 .showWord {
-	/* margin-top: -5%; */
 	position: relative;
 }
 .form {
-	/* height: 300px; */
-	/* background: linear-gradient(
-		rgba(113, 153, 153, 1) 0%,
-		rgba(62, 81, 81, 1) 100%
-	); */
-	/* background-color: red; */
-	/* border-radius: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative; */
 	margin-left: 260px;
 }
 #filterInput {
-	/* margin-top: 35px; */
 	outline: none;
 	border: none;
-	/* padding-bottom: 10px; */
 	padding-left: 10px;
 	width: 30%;
-	/* background-color: aqua; */
 	border-bottom: 1px solid lightgray;
 }
 ::placeholder {
@@ -228,13 +240,10 @@ const updateWord = async (replaceWord) => {
 #filterWord {
 	min-width: 590px;
 	margin-bottom: 15px;
-	/* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
-	/* background-color: aqua; */
 	display: flex;
 }
 i {
 	color: lightgray;
-	/* margin-left: 200px; */
 	margin-top: 10px;
 }
 @media screen and (max-width: 800px) {
@@ -251,13 +260,12 @@ i {
 	.showWord {
 		margin-top: 15%;
 	}
-
 	.success-alert {
 		margin-left: 80px;
 		margin-top: 15px;
 		margin-bottom: -38px;
 	}
-	.null-alert {
+	.fail-alert {
 		margin-left: 80px;
 		margin-top: 15px;
 		margin-bottom: -38px;

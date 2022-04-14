@@ -8,14 +8,16 @@
 					Welcome To ,<br />
 					Vocab Grossary <br />Web Application
 				</h2>
-				<h3>The used key is always bright.(Practice makes perfect)</h3>
+				<h3>The used key is always bright.<br />(Practice makes perfect)</h3>
 				<p>
 					Vocab Glossary is an Web Application created for vocabulary review. Which
 					will be able to randomly the words from the list recorded along with being
 					able to write the meanings of random words to check for accuracy and review
 					memory.
 				</p>
-				<router-link :to="{ name: 'WordList' }"><button>Let's Add Words</button></router-link>
+				<router-link :to="{ name: 'WordList' }"
+					><button>Let's Add Words</button></router-link
+				>
 			</div>
 			<div class="col-2">
 				<img src="../assets/stack.png" class="stack" />
@@ -95,7 +97,6 @@ button:hover {
 }
 .col-2 .stack {
 	width: 80%;
-	/* right: 10%; */
 	position: relative;
 	right: -10%;
 }

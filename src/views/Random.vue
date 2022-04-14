@@ -83,7 +83,6 @@ const meaningShow = () => {
 					</p>
 					<div class="input-and-btn">
 						<div v-show="randomItem.length != 0 && isShow === false">
-							<!-- <label>meaning :</label> -->
 							<input placeholder="Place the meaning..." v-model="answer" />
 						</div>
 						<h2 v-show="isShow" class="meaning">{{ randomItem.meaning }}</h2>
@@ -142,7 +141,6 @@ h3 {
 	background-color: rgb(247, 247, 247);
 }
 .alert {
-	/* margin-top: -5px; */
 	margin-bottom: -15px;
 }
 .random-btn {
@@ -166,7 +164,6 @@ h3 {
 		rgb(50, 66, 66) 100%
 	);
 }
-
 .input-and-btn input {
 	outline: none;
 	width: 60%;
@@ -175,7 +172,6 @@ h3 {
 	padding: 5px;
 	margin-top: 15px;
 }
-
 .inputBtn {
 	border-radius: 6px;
 	margin: 5px;
@@ -184,7 +180,6 @@ h3 {
 .inputBtn:hover {
 	background-color: rgb(244, 244, 244);
 }
-
 .random-card {
 	width: 100%;
 	height: 500px;
@@ -197,13 +192,10 @@ h3 {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	/* margin: 100px 0; */
 }
 .col-1 {
 	flex-basis: 50%;
 	position: relative;
-	/* margin-left: 50px; */
-	/* background-color: aqua; */
 }
 .col-1 img {
 	width: 100%;
