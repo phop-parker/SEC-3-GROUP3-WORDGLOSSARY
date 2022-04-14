@@ -1,15 +1,66 @@
 <script setup>
-defineProps({
-	membersList: {
-		type: Array,
-		require: true
+const members = [
+	{
+		name: 'Sarida',
+		surname: 'Buakaew',
+		studentId: '63130500112',
+		img: '../src/assets/63130500112.png',
+		socailLink: {
+			ig: 'https://www.instagram.com/sarimintt/',
+			fb: 'https://web.facebook.com/sarixmint',
+			github: 'https://github.com/sarimintt'
+		}
+	},
+	{
+		name: 'Sarisa',
+		surname: 'Phulakorn',
+		studentId: '63130500116',
+		img: '../src/assets/63130500116.png',
+		socailLink: {
+			ig: 'https://www.instagram.com/srbeam_/',
+			fb: 'https://www.facebook.com/b.beamsrs',
+			github: 'https://github.com/srbeam'
+		}
+	},
+	{
+		name: 'Siraphop',
+		surname: 'Pattaragatewit',
+		studentId: '63130500119',
+		img: '../src/assets/63130500119.png',
+		socailLink: {
+			ig: 'https://www.instagram.com/siraph.p/',
+			fb: 'https://www.facebook.com/siraph.p/',
+			github: 'https://github.com/phop-parker'
+		}
+	},
+	{
+		name: 'Supichaya',
+		surname: 'Muennunch',
+		studentId: '63130500123',
+		img: '../src/assets/63130500123.png',
+		socailLink: {
+			ig: 'https://www.instagram.com/s.sudjaab_/',
+			fb: 'https://www.facebook.com/spy.spcy',
+			github: 'https://github.com/spyy18'
+		}
+	},
+	{
+		name: 'Thanat',
+		surname: 'Leeruengkij',
+		studentId: '63130500156',
+		img: '../src/assets/63130500156.png',
+		socailLink: {
+			ig: 'https://www.instagram.com/piitur/',
+			fb: 'https://www.facebook.com/PterHolmes',
+			github: 'https://github.com/petergurock'
+		}
 	}
-})
+]
 </script>
 
 <template>
 	<div>
-		<div class="card" v-for="(member, index) in membersList" :key="index">
+		<div class="card" v-for="(member, index) in members" :key="index">
 			<div class="content">
 				<div class="left">
 					<img :src="member.img" />
@@ -41,20 +92,17 @@ defineProps({
 <style scoped>
 .card {
 	max-width: 100%;
-	/* height: 150px; */
 	margin-bottom: 2%;
 	padding: 20px 20px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	/* align-items: center; */
 	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 }
 
 .left {
 	float: left;
-	/* padding-left: 10%; */
 	width: 50%;
 	display: flex;
 	justify-content: center;
@@ -62,10 +110,8 @@ defineProps({
 }
 .right {
 	float: right;
-	/* margin-right: 30%; */
 	width: 50%;
 	height: 65px;
-	/* max-height: 50px; */
 	margin-top: -5px;
 }
 img {
