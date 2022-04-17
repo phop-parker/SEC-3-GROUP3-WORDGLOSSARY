@@ -76,7 +76,7 @@ const meaningShow = () => {
 				<div class="random-card">
 					<h4>Random Word</h4>
 					<h2>{{ randomItem.word }}</h2>
-					<div v-show="fullWords.length == 1" id="oneWord">
+					<div v-show="fullWords.length == 1">
 						<p>
 							You have only 1 Word ,
 							<br />Please go to Word List page and enter more word.
@@ -86,7 +86,7 @@ const meaningShow = () => {
 						>
 					</div>
 
-					<p v-show="randomItem == 0 && fullWords.length > 1" id="welcomeRand">
+					<p v-show="randomItem == 0 && fullWords.length > 1">
 						click random button to random 1 word from
 						<b>{{ fullWords.length }}</b> words
 					</p>
