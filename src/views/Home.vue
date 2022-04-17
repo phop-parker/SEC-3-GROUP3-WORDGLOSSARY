@@ -6,11 +6,11 @@
 			<div class="col-1">
 				<h2>
 					Welcome To ,<br />
-					Vocab Grossary <br />Web Application
+					Word Grossary <br />Web Application
 				</h2>
 				<h3>The used key is always bright.<br />(Practice makes perfect)</h3>
 				<p>
-					Vocab Glossary is an Web Application created for vocabulary review. Which
+					Word Glossary is an Web Application created for vocabulary review. Which
 					will be able to randomly the words from the list recorded along with being
 					able to write the meanings of random words to check for accuracy and review
 					memory.

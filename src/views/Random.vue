@@ -70,8 +70,11 @@ const meaningShow = () => {
 				<img src="../assets/books.jpg" />
 			</div>
 			<div class="col-2">
+				<p v-show="randomWordCount > 0" class="count">
+					Answer Correct {{ correctAnsCount }} from {{ randomWordCount }} Random
+				</p>
 				<div class="random-card">
-					<h3>Random Word</h3>
+					<h4>Random Word</h4>
 					<h2>{{ randomItem.word }}</h2>
 					<div v-show="fullWords.length == 1" id="oneWord">
 						<p>
@@ -137,6 +140,10 @@ const meaningShow = () => {
 </template>
 
 <style scoped>
+.count {
+	margin-left: 58%;
+	font-size: 14px;
+}
 .goToWordList {
 	width: 200px;
 	border: 0;
@@ -150,6 +157,7 @@ const meaningShow = () => {
 	);
 	border-radius: 6px;
 	cursor: pointer;
+	margin-top: 15px;
 }
 .goToWordList:hover {
 	background: linear-gradient(
@@ -158,8 +166,9 @@ const meaningShow = () => {
 		rgb(50, 66, 66) 100%
 	);
 }
-h3 {
+h4 {
 	margin-bottom: 20px;
+	margin-top: 15px;
 }
 .meaning {
 	color: green;
@@ -232,7 +241,13 @@ h3 {
 .col-2 {
 	position: relative;
 	flex-basis: 50%;
-	display: flex;
+	display: block;
 	align-items: center;
+}
+@media screen and (max-width: 800px) {
+	.count {
+		margin-left: 0px;
+		font-size: 13px;
+	}
 }
 </style>

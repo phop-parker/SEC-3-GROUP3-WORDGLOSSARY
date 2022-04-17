@@ -4,6 +4,11 @@
       "word": "dog",
       "meaning": "หมา",
       "id": 1
+    },
+    {
+      "word": "cat",
+      "meaning": "แมว",
+      "id": 2
     }
   ],
   "message": [
