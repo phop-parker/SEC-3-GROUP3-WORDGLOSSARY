@@ -73,10 +73,16 @@ const meaningShow = () => {
 				<div class="random-card">
 					<h3>Random Word</h3>
 					<h2>{{ randomItem.word }}</h2>
-					<p v-show="fullWords.length == 1" id="oneWord">
-						You have only 1 Word ,
-						<br />please go to word-list page and enter more word.
-					</p>
+					<div v-show="fullWords.length == 1" id="oneWord">
+						<p>
+							You have only 1 Word ,
+							<br />Please go to Word List page and enter more word.
+						</p>
+						<router-link :to="{ name: 'WordList' }"
+							><button class="goToWordList">Let's Add More Words</button></router-link
+						>
+					</div>
+
 					<p v-show="randomItem == 0 && fullWords.length > 1" id="welcomeRand">
 						click random button to random 1 word from
 						<b>{{ fullWords.length }}</b> words
@@ -131,6 +137,27 @@ const meaningShow = () => {
 </template>
 
 <style scoped>
+.goToWordList {
+	width: 200px;
+	border: 0;
+	padding: 10px 8px;
+	outline: none;
+	color: white;
+	background: linear-gradient(
+		90deg,
+		rgba(113, 153, 153, 1) 0%,
+		rgba(62, 81, 81, 1) 100%
+	);
+	border-radius: 6px;
+	cursor: pointer;
+}
+.goToWordList:hover {
+	background: linear-gradient(
+		90deg,
+		rgb(102, 137, 137) 0%,
+		rgb(50, 66, 66) 100%
+	);
+}
 h3 {
 	margin-bottom: 20px;
 }
@@ -151,10 +178,11 @@ h3 {
 		rgba(62, 81, 81, 1) 100%
 	);
 	margin-top: 8px;
-	height: 35px;
+	/* height: 35px; */
 	border-radius: 6px;
 	outline: none;
 	border: 0;
+	padding: 8px 8px;
 }
 .random-btn:hover {
 	cursor: pointer;
